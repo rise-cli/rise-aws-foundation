@@ -8,8 +8,8 @@
         "test": "jest",
         "test:watch": "jest --watch",
         "test:coverage": "jest --coverage=true",
-        "ci:test:inlinelambda": "jest test/inlineLambdtest.test",
-        "ci:test:s3": "jest test/s3.test"
+        "ci:test:inlineLambda": "jest tests/inlineLambda.test",
+        "ci:test:s3": "jest tests/s3.test"
     },
     "keywords": [],
     "author": "",

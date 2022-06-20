@@ -1,4 +1,5 @@
 const setupAwsFoundation = require('../src/index')
+const fs = require('fs')
 const foundation = setupAwsFoundation({
     type: 'real'
 })
