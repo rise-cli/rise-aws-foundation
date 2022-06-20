@@ -9,7 +9,8 @@
         "test:watch": "jest --watch",
         "test:coverage": "jest --coverage=true",
         "ci:test:inlineLambda": "jest tests/inlineLambda.test",
-        "ci:test:s3": "jest tests/s3.test"
+        "ci:test:s3": "jest tests/s3.test",
+        "ci:test:lambda": "jest test/lambda.test"
     },
     "keywords": [],
     "author": "",
@@ -18,6 +19,7 @@
         "aws-sdk": "^2.1157.0"
     },
     "devDependencies": {
+        "fs-extra": "^10.1.0",
         "jest": "^28.1.1"
     }
 }

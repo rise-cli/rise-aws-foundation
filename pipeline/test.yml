@@ -10,3 +10,4 @@ phases:
             - npm i
             - npm run ci:test:inlineLambda
             - npm run ci:test:s3
+            - npm run ci:test:lambda

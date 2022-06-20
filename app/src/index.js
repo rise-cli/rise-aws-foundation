@@ -1,4 +1,4 @@
-// CF
+// CloudFormation
 const { deployStack } = require('./cloudformation/deployStack')
 const { getDeployStatus } = require('./cloudformation/getDeployStatus')
 const { getOutputs } = require('./cloudformation/getOutputs')
@@ -6,6 +6,8 @@ const { removeStack } = require('./cloudformation/removeStack')
 
 // Lambda
 const { makeInlineLambda } = require('./lambda/cfMakeInlineLambda')
+const { makeLambda } = require('./lambda/cfMakeLambda')
+const { updateLambdaCode } = require('./lambda/updateLambdaCode')
 const { invokeLambda } = require('./lambda/invokeLambda')
 
 // S3
@@ -27,6 +29,8 @@ module.exports = (config) => {
             },
             lambda: {
                 makeInlineLambda,
+                makeLambda,
+                updateLambdaCode,
                 invokeLambda
             },
             s3: {

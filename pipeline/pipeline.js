@@ -18,6 +18,13 @@ module.exports = {
             actions: [
                 {
                     type: 'DEPLOY',
+                    name: 'DeployBase',
+                    inputArtifact: 'sourceZip',
+                    stackName: 'RiseAWSFoundationTestBase',
+                    template: 'app/infrastructure/baseStack.json'
+                },
+                {
+                    type: 'DEPLOY',
                     name: 'DeployInlineLambda',
                     inputArtifact: 'sourceZip',
                     stackName: 'RiseAWSFoundationTestInlineLambda',
@@ -29,6 +36,13 @@ module.exports = {
                     inputArtifact: 'sourceZip',
                     stackName: 'RiseAWSFoundationTestS3',
                     template: 'app/infrastructure/s3Stack.json'
+                },
+                {
+                    type: 'DEPLOY',
+                    name: 'DeployLambda',
+                    inputArtifact: 'sourceZip',
+                    stackName: 'RiseAWSFoundationTestLambda',
+                    template: 'app/infrastructure/lambdaStack.json'
                 },
                 {
                     type: 'BUILD',
