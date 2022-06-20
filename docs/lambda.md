@@ -19,7 +19,7 @@ const functionArn = await rise.lambda.updateCode({
 
 ```js
 const rise = require('rise-aws-foundation')
-const lambdaCloudformation = rise.lambda.cf.makeLambda({
+const lambdaCloudformation = rise.lambda.makeLambda({
     // required
     appName: 'nameOfApp',
     name: 'nameOfFunction',

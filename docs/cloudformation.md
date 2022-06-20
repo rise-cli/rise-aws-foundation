@@ -66,7 +66,7 @@ const removeResult = await rise.cloudformation.getRemoveStatus({
 
 ```js
 const rise = require('rise-aws-foundation')
-const outputResult = await rise.cloudformation.getCloudFormationOutputs({
+const outputResult = await rise.cloudformation.getOutputs({
     stack: 'nameOfStack',
     outputs: ['Output1', 'Output2']
 })
