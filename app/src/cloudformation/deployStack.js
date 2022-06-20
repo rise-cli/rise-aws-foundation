@@ -28,7 +28,7 @@ async function updateStack(props) {
     return await props.cloudformation.updateStack(params).promise()
 }
 
-module.exports.deploySatack = async function deployStack(props) {
+module.exports.deployStack = async function deployStack(props) {
     const aws = props.AWS || AWS
     const cloudformation = new aws.CloudFormation({
         region: props.region || process.env.AWS_REGION || 'us-east-1'

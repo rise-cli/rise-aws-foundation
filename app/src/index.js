@@ -4,6 +4,7 @@ const { getOutputs } = require('./cloudformation/getOutputs')
 const { removeStack } = require('./cloudformation/removeStack')
 
 const { makeInlineLambda } = require('./lambda/cfMakeInlineLambda')
+const { invokeLambda } = require('./lambda/invokeLambda')
 
 module.exports = (config) => {
     if (config.type === 'real') {
@@ -15,7 +16,8 @@ module.exports = (config) => {
                 removeStack
             },
             lambda: {
-                makeInlineLambda
+                makeInlineLambda,
+                invokeLambda
             }
         }
     }

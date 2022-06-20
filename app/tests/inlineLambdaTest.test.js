@@ -1,10 +1,6 @@
 const { makeInlineLambda } = require('../src/lambda/cfMakeInlineLambda')
+const { invokeLambda } = require('../src/lambda/invokeLambda')
 const { deployStack } = require('../src/cloudformation/deployStack')
-const aws = require('aws-sdk')
-
-const lambda = new aws.Lambda({
-    region: 'us-east-1'
-})
 
 const STACK_NAME = 'RiseAWSFoundationTestInlineLambda'
 test('cf.makeInlineLambda CloudFormation is valid', async () => {
@@ -29,11 +25,9 @@ test('cf.makeInlineLambda CloudFormation is valid', async () => {
     /**
      * Test that deployed lambda function works
      */
-    const executionResult = await lambda
-        .invoke({
-            FunctionName: 'riseawsfoundationinlinelambdatest-lambda-dev'
-        })
-        .promise()
+    const executionResult = await invokeLambda({
+        name: 'riseawsfoundationinlinelambdatest-lambda-dev'
+    })
 
-    expect(executionResult.Payload).toBe('2')
+    expect(executionResult).toBe('2')
 })
