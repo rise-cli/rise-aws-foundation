@@ -18,7 +18,7 @@ test('cf.makeLambda CloudFormation is valid', async () => {
     /**
      * Upload example lambda function code
      */
-    const file = await readFile('test/utils/code.zip')
+    const file = await readFile('tests/utils/code.zip')
 
     await foundation.s3.uploadFile({
         file,

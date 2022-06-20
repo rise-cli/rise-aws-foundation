@@ -10,7 +10,7 @@
         "test:coverage": "jest --coverage=true",
         "ci:test:inlineLambda": "jest tests/inlineLambda.test",
         "ci:test:s3": "jest tests/s3.test",
-        "ci:test:lambda": "jest test/lambda.test"
+        "ci:test:lambda": "jest tests/lambda.test"
     },
     "keywords": [],
     "author": "",
