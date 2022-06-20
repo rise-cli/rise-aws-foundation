@@ -3,17 +3,17 @@
         "LambdalambdadevLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-                "LogGroupName": "/aws/lambda/risefoundationtest-lambda-dev"
+                "LogGroupName": "/aws/lambda/riseawsfoundationtest-lambda-dev"
             }
         },
         "Lambdalambdadev": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
                 "Code": {
-                    "S3Bucket": "risefoundationtestbase-risefoundationtestresource-1oyazk301hbrk",
+                    "S3Bucket": "riseawsfoundationtestbas-riseawsfoundationtestres-9ap6hj6bds8n",
                     "S3Key": "code/lambda.zip"
                 },
-                "FunctionName": "risefoundationtest-lambda-dev",
+                "FunctionName": "riseawsfoundationtest-lambda-dev",
                 "Handler": "index.handler",
                 "MemorySize": 1024,
                 "Role": {
@@ -45,7 +45,7 @@
                 },
                 "Policies": [
                     {
-                        "PolicyName": "LambdarisefoundationtestlambdadevRolePolicy",
+                        "PolicyName": "LambdariseawsfoundationtestlambdadevRolePolicy",
                         "PolicyDocument": {
                             "Version": "2012-10-17",
                             "Statement": [
@@ -54,7 +54,7 @@
                                     "Resource": [
                                         {
                                             "Fn::Sub": [
-                                                "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/risefoundationtest-lambda-dev:*",
+                                                "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/riseawsfoundationtest-lambda-dev:*",
                                                 {}
                                             ]
                                         }
@@ -66,7 +66,7 @@
                                     "Resource": [
                                         {
                                             "Fn::Sub": [
-                                                "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/risefoundationtest-lambda-dev:*:*",
+                                                "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/riseawsfoundationtest-lambda-dev:*:*",
                                                 {}
                                             ]
                                         }
@@ -78,7 +78,7 @@
                     }
                 ],
                 "Path": "/",
-                "RoleName": "LambdarisefoundationtestlambdadevRole"
+                "RoleName": "LambdariseawsfoundationtestlambdadevRole"
             }
         }
     },

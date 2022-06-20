@@ -30,7 +30,7 @@ test('cf.makeLambda CloudFormation is valid', async () => {
      * Test makeLambda deployment
      */
     const x = foundation.lambda.makeLambda({
-        appName: 'risefoundationtest',
+        appName: 'riseawsfoundationtest',
         name: 'lambda',
         stage: 'dev',
         bucketArn: 'arn:aws:s3:::' + Bucket,
@@ -49,7 +49,7 @@ test('cf.makeLambda CloudFormation is valid', async () => {
      * Test that deployed lambda function works
      */
     const executionResult = await foundation.lambda.invokeLambda({
-        name: 'risefoundationtest-lambda-dev'
+        name: 'riseawsfoundationtest-lambda-dev'
     })
 
     expect(executionResult).toBe('2')
