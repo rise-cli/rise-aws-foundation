@@ -50,10 +50,6 @@ module.exports = {
                     script: '/test.yml',
                     inputArtifact: 'sourceZip',
                     outputArtifact: 'testZip'
-                },
-                {
-                    type: 'APPROVAL',
-                    name: 'PublishNewVersion'
                 }
             ]
         },
