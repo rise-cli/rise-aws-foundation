@@ -17,6 +17,13 @@ module.exports = {
             name: 'Staging',
             actions: [
                 {
+                    type: 'DEPLOY',
+                    name: 'DeployInlineLambda',
+                    inputArtifact: 'sourceZip',
+                    stackName: 'RiseAWSFoundationTestInlineLambda',
+                    template: 'app/infrastructure/inlineLambdaStack.json'
+                },
+                {
                     type: 'BUILD',
                     name: 'Test',
                     script: '/test.yml',
@@ -24,15 +31,8 @@ module.exports = {
                     outputArtifact: 'testZip'
                 },
                 {
-                    type: 'BUILD',
-                    name: 'DeployDocumentation',
-                    script: '/docs.yml',
-                    inputArtifact: 'sourceZip',
-                    outputArtifact: 'docZip'
-                },
-                {
                     type: 'APPROVAL',
-                    name: 'GoToProd'
+                    name: 'PublishNewVersion'
                 }
             ]
         },
@@ -48,6 +48,13 @@ module.exports = {
                     },
                     inputArtifact: 'sourceZip',
                     outputArtifact: 'publishedZip'
+                },
+                {
+                    type: 'BUILD',
+                    name: 'DeployDocumentation',
+                    script: '/docs.yml',
+                    inputArtifact: 'sourceZip',
+                    outputArtifact: 'docZip'
                 }
             ]
         }
