@@ -1,0 +1,74 @@
+{
+    "Resources": {
+        "MytestbucketBucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+                "BucketEncryption": {
+                    "ServerSideEncryptionConfiguration": [
+                        {
+                            "ServerSideEncryptionByDefault": {
+                                "SSEAlgorithm": "AES256"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "MytestbucketBucketPolicy": {
+            "Type": "AWS::S3::BucketPolicy",
+            "Properties": {
+                "Bucket": {
+                    "Ref": "MytestbucketBucket"
+                },
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "s3:*",
+                            "Effect": "Deny",
+                            "Principal": "*",
+                            "Resource": [
+                                {
+                                    "Fn::Join": [
+                                        "",
+                                        [
+                                            "arn:",
+                                            {
+                                                "Ref": "AWS::Partition"
+                                            },
+                                            ":s3:::",
+                                            {
+                                                "Ref": "MytestbucketBucket"
+                                            },
+                                            "/*"
+                                        ]
+                                    ]
+                                }
+                            ],
+                            "Condition": {
+                                "Bool": {
+                                    "aws:SecureTransport": false
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "MysimpletestbucketBucket": {
+            "Type": "AWS::S3::Bucket",
+            "DeletionPolicy": "Delete"
+        }
+    },
+    "Outputs": {
+        "MytestbucketBucket": {
+            "Value": {
+                "Ref": "MytestbucketBucket"
+            }
+        },
+        "MysimpletestbucketBucket": {
+            "Value": {
+                "Ref": "MysimpletestbucketBucket"
+            }
+        }
+    }
+}

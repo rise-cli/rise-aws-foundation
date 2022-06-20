@@ -8,4 +8,5 @@ phases:
         commands:
             - cd ./app
             - npm i
-            - npm run test:coverage
+            - npm run ci:test:inlineLambda
+            - npm run ci:test:s3

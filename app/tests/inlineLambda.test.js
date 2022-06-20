@@ -1,13 +1,14 @@
-const { makeInlineLambda } = require('../src/lambda/cfMakeInlineLambda')
-const { invokeLambda } = require('../src/lambda/invokeLambda')
-const { deployStack } = require('../src/cloudformation/deployStack')
+const setupAwsFoundation = require('../src/index')
+const foundation = setupAwsFoundation({
+    type: 'real'
+})
 
 const STACK_NAME = 'RiseAWSFoundationTestInlineLambda'
 test('cf.makeInlineLambda CloudFormation is valid', async () => {
     /**
      * Test makeLambda deployment
      */
-    const x = makeInlineLambda({
+    const x = foundation.lambda.makeInlineLambda({
         appName: 'riseawsfoundationinlinelambdatest',
         name: 'lambda',
         stage: 'dev',
@@ -15,7 +16,7 @@ test('cf.makeInlineLambda CloudFormation is valid', async () => {
         code: `module.exports.handler = async () => 2`
     })
 
-    const res = await deployStack({
+    const res = await foundation.cloudformation.deployStack({
         name: STACK_NAME,
         template: JSON.stringify(x)
     })
@@ -25,7 +26,7 @@ test('cf.makeInlineLambda CloudFormation is valid', async () => {
     /**
      * Test that deployed lambda function works
      */
-    const executionResult = await invokeLambda({
+    const executionResult = await foundation.lambda.invokeLambda({
         name: 'riseawsfoundationinlinelambdatest-lambda-dev'
     })
 

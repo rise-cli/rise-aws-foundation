@@ -24,6 +24,13 @@ module.exports = {
                     template: 'app/infrastructure/inlineLambdaStack.json'
                 },
                 {
+                    type: 'DEPLOY',
+                    name: 'DeployS3',
+                    inputArtifact: 'sourceZip',
+                    stackName: 'RiseAWSFoundationTestS3',
+                    template: 'app/infrastructure/s3Stack.json'
+                },
+                {
                     type: 'BUILD',
                     name: 'Test',
                     script: '/test.yml',
