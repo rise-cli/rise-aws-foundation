@@ -18,6 +18,9 @@ const { getFileUrl } = require('./s3/getFileUrl')
 const { removeFile } = require('./s3/removeFile')
 const { uploadFile } = require('./s3/uploadFile')
 
+// ApiGateway
+const { makeApiGateway } = require('./apigateway/cfMakeApiGateway')
+
 module.exports = (config) => {
     if (config.type === 'real') {
         return {
@@ -40,6 +43,9 @@ module.exports = (config) => {
                 getFileUrl,
                 removeFile,
                 uploadFile
+            },
+            apigateway: {
+                makeApiGateway
             }
         }
     }

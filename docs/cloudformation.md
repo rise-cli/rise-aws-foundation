@@ -1,0 +1,73 @@
+# CloudFormation
+
+## Introduction
+
+CloudFormation is the way we deploy things into an AWS account. Every other resource within rise foundations
+has methods that will create JSON objects representing AWS resources. With this information,
+we can deploy a Cloudformation stack.
+
+## cloudformation.deployStack
+
+```js
+const rise = require('rise-aws-foundation')
+const createResult = await rise.cloudformation.deployStack({
+    name: 'testingstack',
+    template: myTemplate
+})
+```
+
+## cloudformation.getDeployStatus
+
+```js
+const rise = require('rise-aws-foundation')
+const deployResult = await rise.cloudformation.getDeployStatus({
+    config: {
+        stackName: 'testingstack',
+        minRetryInterval: 1000,
+        maxRetryInterval: 5000,
+        backoffRate: 1.2,
+        maxRetries: 50,
+        onCheck: (x) => {
+            // code to handle every status update
+        }
+    }
+})
+```
+
+## cloudformation.removeStack
+
+```js
+const rise = require('rise-aws-foundation')
+const removeResult = await rise.cloudformation.removeStack({
+    name: 'testingstack',
+    template: myTemplate
+})
+```
+
+## cloudformation.getRemoveStatus
+
+```js
+const rise = require('rise-aws-foundation')
+const removeResult = await rise.cloudformation.getRemoveStatus({
+    config: {
+        stackName: 'testingstack',
+        minRetryInterval: 1000,
+        maxRetryInterval: 5000,
+        backoffRate: 1.2,
+        maxRetries: 50,
+        onCheck: (x) => {
+            // code to handle every status update
+        }
+    }
+})
+```
+
+## cloudformation.getCloudFormationOutputs
+
+```js
+const rise = require('rise-aws-foundation')
+const outputResult = await rise.cloudformation.getCloudFormationOutputs({
+    stack: 'nameOfStack',
+    outputs: ['Output1', 'Output2']
+})
+```
