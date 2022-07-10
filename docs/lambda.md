@@ -2,7 +2,13 @@
 
 ## Introduction
 
-Lambda is...
+There are many ways to run your code on the cloud. Rise AWS Foundation purposely only provides 1 option, AWS Lambda. Lambda functions are:
+
+-   pay per execution
+-   can scale automatically
+-   cost nothing if they are not triggered
+-   are a managed service. You only need to care about code, you dont have to care about operating systems, patching, or any server configuration.
+-   is cheap (first 1 million invocations a month are free)
 
 ## lambda.updateCode
 

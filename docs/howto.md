@@ -9,7 +9,7 @@ Rise Foundation helps you:
 
 ## Creating AWS resources
 
-CloudFormation is the best way to create resources. Without Cloudformation,
+CloudFormation is the best way to create resources in aws. Without Cloudformation,
 you would have to execute individual sdk calls to create resources. This gets
 very complicated when creating multiple resources that depend on eachother. You
 will need to create resources in the correct order, and you will need to write

@@ -21,6 +21,12 @@ const { uploadFile } = require('./s3/uploadFile')
 // ApiGateway
 const { makeApiGateway } = require('./apigateway/cfMakeApiGateway')
 
+// CodeStar
+const { makeArtifactBucket } = require('./codestar/cfMakeArtifactBucket')
+const { makeGithubConnection } = require('./codestar/cfMakeGithubConnection')
+const { makeBuildProject } = require('./codestar/cfMakeBuildProject')
+const { makePipeline } = require('./codestar/cfMakePipeline')
+
 module.exports = (config) => {
     if (config.type === 'real') {
         return {
@@ -46,6 +52,12 @@ module.exports = (config) => {
             },
             apigateway: {
                 makeApiGateway
+            },
+            codestar: {
+                makeArtifactBucket,
+                makeGithubConnection,
+                makeBuildProject,
+                makePipeline
             }
         }
     }
