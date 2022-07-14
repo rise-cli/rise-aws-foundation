@@ -27,6 +27,9 @@ const { makeGithubConnection } = require('./codestar/cfMakeGithubConnection')
 const { makeBuildProject } = require('./codestar/cfMakeBuildProject')
 const { makePipeline } = require('./codestar/cfMakePipeline')
 
+// Keywords
+const { getKeyword } = require('./keywords/index')
+
 module.exports = (config) => {
     if (config.type === 'real') {
         return {
@@ -58,6 +61,9 @@ module.exports = (config) => {
                 makeGithubConnection,
                 makeBuildProject,
                 makePipeline
+            },
+            keywords: {
+                getKeyword
             }
         }
     }
