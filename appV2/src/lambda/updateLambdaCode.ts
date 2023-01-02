@@ -1,26 +1,29 @@
 const AWS = require('aws-sdk')
 
-// export type UpdateLambdaCodeInput = {
-//     name: string
-//     bucket: string
-//     filePath: string
-// }
+export type UpdateLambdaCodeInput = {
+    name: string
+    bucket: string
+    filePath: string
+    region: string
+}
 
-module.exports.updateLambdaCode = async function updateLambdaCode({
+export async function updateLambdaCode({
     name,
     bucket,
     filePath,
     region
-}) {
-    const lambda = new AWS.Lambda({
-        region: region || process.env.AWS_REGION || 'us-east-1'
-    })
+}: UpdateLambdaCodeInput) {
     const functionCodeParams = {
         FunctionName: name,
         Publish: true,
         S3Bucket: bucket,
         S3Key: filePath
     }
+
+    const theRegion = region || process.env.AWS_REGION || 'us-east-1'
+    const lambda = new AWS.Lambda({
+        region: theRegion
+    })
 
     const res = await lambda.updateFunctionCode(functionCodeParams).promise()
     return res.FunctionArn

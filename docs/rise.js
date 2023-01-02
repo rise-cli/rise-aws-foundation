@@ -1,5 +1,5 @@
 module.exports = {
-    title: 'RISE AWS Foundation',
+    name: 'RISE AWS Foundation',
     logo: `<svg  height="14px" viewBox="0 0 50 50" version="1.1">
     <defs>
         <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
@@ -16,7 +16,10 @@ module.exports = {
         'How To': 'howto.md',
         'Cloud Formation': 'cloudformation.md',
         Lambda: 'lambda.md',
-        S3: 's3.md'
+        S3: 's3.md',
+        DynamoDB: 'db.md',
+        Cognito: 'cognito.md',
+        CodeStar: 'codestar.md'
         // 'Api Gateway': 'apigateway.md'
     }
 }

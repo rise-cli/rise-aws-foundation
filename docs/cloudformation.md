@@ -2,15 +2,15 @@
 
 ## Introduction
 
-CloudFormation is the way we deploy things into an AWS account. Every other resource within rise foundations
+CloudFormation is the way we deploy things into an AWS account. Every other resource within aws foundations
 has methods that will create JSON objects representing AWS resources. With this information,
 we can deploy a Cloudformation stack.
 
 ## cloudformation.deployStack
 
 ```js
-const rise = require('rise-aws-foundation')
-const createResult = await rise.cloudformation.deployStack({
+const aws = require('aws-foundation')
+const createResult = await aws.cloudformation.deployStack({
     name: 'testingstack',
     template: myTemplate
 })
@@ -19,8 +19,8 @@ const createResult = await rise.cloudformation.deployStack({
 ## cloudformation.getDeployStatus
 
 ```js
-const rise = require('rise-aws-foundation')
-const deployResult = await rise.cloudformation.getDeployStatus({
+const aws = require('aws-foundation')
+const deployResult = await aws.cloudformation.getDeployStatus({
     config: {
         stackName: 'testingstack',
         minRetryInterval: 1000,
@@ -37,8 +37,8 @@ const deployResult = await rise.cloudformation.getDeployStatus({
 ## cloudformation.removeStack
 
 ```js
-const rise = require('rise-aws-foundation')
-const removeResult = await rise.cloudformation.removeStack({
+const aws = require('aws-foundation')
+const removeResult = await aws.cloudformation.removeStack({
     name: 'testingstack',
     template: myTemplate
 })
@@ -47,8 +47,8 @@ const removeResult = await rise.cloudformation.removeStack({
 ## cloudformation.getRemoveStatus
 
 ```js
-const rise = require('rise-aws-foundation')
-const removeResult = await rise.cloudformation.getRemoveStatus({
+const aws = require('aws-foundation')
+const removeResult = await aws.cloudformation.getRemoveStatus({
     config: {
         stackName: 'testingstack',
         minRetryInterval: 1000,
@@ -65,8 +65,8 @@ const removeResult = await rise.cloudformation.getRemoveStatus({
 ## cloudformation.getCloudFormationOutputs
 
 ```js
-const rise = require('rise-aws-foundation')
-const outputResult = await rise.cloudformation.getOutputs({
+const aws = require('aws-foundation')
+const outputResult = await aws.cloudformation.getOutputs({
     stack: 'nameOfStack',
     outputs: ['Output1', 'Output2']
 })

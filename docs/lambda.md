@@ -13,8 +13,8 @@ There are many ways to run your code on the cloud. Rise AWS Foundation purposely
 ## lambda.updateCode
 
 ```js
-const rise = require('rise-aws-foundation')
-const functionArn = await rise.lambda.updateCode({
+const aws = require('aws-foundation')
+const functionArn = await aws.lambda.updateCode({
     name: 'myFunctionName',
     bucket: 'myBucketName',
     filePath: '/path/to/file.zip'
@@ -24,8 +24,8 @@ const functionArn = await rise.lambda.updateCode({
 ## lambda.cf.makeLambda
 
 ```js
-const rise = require('rise-aws-foundation')
-const lambdaCloudformation = rise.lambda.makeLambda({
+const aws = require('aws-foundation')
+const lambdaCloudformation = aws.lambda.makeLambda({
     // required
     appName: 'nameOfApp',
     name: 'nameOfFunction',
@@ -45,5 +45,50 @@ const lambdaCloudformation = rise.lambda.makeLambda({
     handler: 'src/custom.action',
     timeout: 900, // defaults to 6
     layers: ['arn:of:my:layer']
+})
+```
+
+## lambda.cf.makeInlineLambda
+
+```js
+const aws = require('aws-foundation')
+const code = `
+module.exports.handler = async () => {
+    return 200
+}
+`
+const lambdaCloudformation = aws.lambda.makeLambda({
+    // required
+    appName: 'nameOfApp',
+    name: 'nameOfFunction',
+    stage: 'dev',
+    code,
+    permissions: [
+        {
+            Action: 'something',
+            Resources: '*'
+        }
+    ],
+    // optional
+    env: {
+        DB: 'mydb'
+    },
+    handler: 'src/custom.action',
+    timeout: 900, // defaults to 6
+    layers: ['arn:of:my:layer']
+})
+```
+
+## lambda.cf.invokeLambda
+
+```js
+const aws = require('aws-foundation')
+
+const lambdaCloudformation = await aws.lambda.invokeLambda({
+    name: 'myLambda',
+    payload: JSON.stringify({
+        id: 100
+    }),
+    region: 'us-east-1
 })
 ```

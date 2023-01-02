@@ -1,8 +1,8 @@
-# How to use Rise Foundation
+# How to use AWS Foundation
 
 ## Introduction
 
-Rise Foundation helps you:
+AWS Foundation helps you:
 
 -   Create AWS resources
 -   Act on those AWS resources
@@ -25,14 +25,14 @@ enables you to define outputs, properties about your deployed resources that are
 available for reference. This is very good for exposing values that are
 genereted during deployment such as S3 Bucket names or Lambda Function names.
 
-For these reasons, Rise Foundation has no methods for creating AWS resources with
+For these reasons, AWS Foundation has no methods for creating AWS resources with
 the sdk, but instead has methods for creating CloudFormation templates. Once all AWS resources
 are defined in templates, we can combine them into 1 template and use the CloudFormation methods
 to deploy that template.
 
-### How CloudFormation is created in Rise Foundation
+### How CloudFormation is created in AWS Foundation
 
-Rise Foundation resource categories (S3, Lambda) may have a `.cf` property containing
+AWS Foundation resource categories (S3, Lambda) may have a `.cf` property containing
 all of the create methods. These create methods will always return the following:
 
 ```js
@@ -76,11 +76,11 @@ const template = {
 }
 ```
 
-We can now deploy this template using the CloudFormation methods in Rise Foundation:
+We can now deploy this template using the CloudFormation methods in AWS Foundation:
 
 ```js
-const rise = require('rise-foundation')
-const createResult = await rise.cloudformation.deployStack({
+const aws = require('aws-foundation')
+const createResult = await aws.cloudformation.deployStack({
     name: 'mystack',
     template: JSON.stringify(template)
 })

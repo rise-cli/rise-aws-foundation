@@ -1,7 +1,15 @@
-const aws = require('aws-sdk')
+const AWS = require('aws-sdk')
 
-module.exports.invokeLambda = async ({ name, payload, region }) => {
-    let params = {
+export const invokeLambda = async ({
+    name,
+    payload,
+    region
+}: {
+    name: string
+    payload: string
+    region?: string
+}) => {
+    let params: any = {
         FunctionName: name
     }
 
@@ -9,7 +17,7 @@ module.exports.invokeLambda = async ({ name, payload, region }) => {
         params.Payload = payload
     }
 
-    const lambda = new aws.Lambda({
+    const lambda = new AWS.Lambda({
         region: region || process.env.AWS_REGION || 'us-east-1'
     })
 
