@@ -9,7 +9,7 @@ we can deploy a Cloudformation stack.
 ## cloudformation.deployStack
 
 ```js
-const aws = require('aws-foundation')
+import * as aws from 'rise-aws-foundation'
 const createResult = await aws.cloudformation.deployStack({
     name: 'testingstack',
     template: myTemplate
@@ -19,7 +19,7 @@ const createResult = await aws.cloudformation.deployStack({
 ## cloudformation.getDeployStatus
 
 ```js
-const aws = require('aws-foundation')
+import * as aws from 'rise-aws-foundation'
 const deployResult = await aws.cloudformation.getDeployStatus({
     config: {
         stackName: 'testingstack',
@@ -37,7 +37,7 @@ const deployResult = await aws.cloudformation.getDeployStatus({
 ## cloudformation.removeStack
 
 ```js
-const aws = require('aws-foundation')
+import * as aws from 'rise-aws-foundation'
 const removeResult = await aws.cloudformation.removeStack({
     name: 'testingstack',
     template: myTemplate
@@ -47,7 +47,7 @@ const removeResult = await aws.cloudformation.removeStack({
 ## cloudformation.getRemoveStatus
 
 ```js
-const aws = require('aws-foundation')
+import * as aws from 'rise-aws-foundation'
 const removeResult = await aws.cloudformation.getRemoveStatus({
     config: {
         stackName: 'testingstack',
@@ -65,7 +65,7 @@ const removeResult = await aws.cloudformation.getRemoveStatus({
 ## cloudformation.getCloudFormationOutputs
 
 ```js
-const aws = require('aws-foundation')
+import * as aws from 'rise-aws-foundation'
 const outputResult = await aws.cloudformation.getOutputs({
     stack: 'nameOfStack',
     outputs: ['Output1', 'Output2']

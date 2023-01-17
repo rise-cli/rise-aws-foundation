@@ -1,24 +1,17 @@
 {
     "name": "rise-aws-foundation",
-    "version": "0.0.6",
+    "version": "0.0.10",
     "description": "",
-    "main": "src/index.js",
+    "type": "module",
+    "main": "index.js",
     "scripts": {
-        "test": "jest",
-        "test:watch": "jest --watch",
-        "test:coverage": "jest --coverage=true",
-        "ci:test:inlineLambda": "jest tests/inlineLambda.test",
-        "ci:test:s3": "jest tests/s3.test",
-        "ci:test:lambda": "jest tests/lambda.test"
+        "test": "node --test && echo \"✅ Tests Pass\"",
+        "release": "npm run test && npm publish"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "aws-sdk": "^2.1157.0"
-    },
-    "devDependencies": {
-        "fs-extra": "^10.1.0",
-        "jest": "^28.1.1"
+        "aws-sdk": "^2.1295.0"
     }
 }

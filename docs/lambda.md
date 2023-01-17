@@ -13,7 +13,7 @@ There are many ways to run your code on the cloud. Rise AWS Foundation purposely
 ## lambda.updateCode
 
 ```js
-const aws = require('aws-foundation')
+import * as aws from 'rise-aws-foundation'
 const functionArn = await aws.lambda.updateCode({
     name: 'myFunctionName',
     bucket: 'myBucketName',
@@ -24,7 +24,7 @@ const functionArn = await aws.lambda.updateCode({
 ## lambda.cf.makeLambda
 
 ```js
-const aws = require('aws-foundation')
+import * as aws from 'rise-aws-foundation'
 const lambdaCloudformation = aws.lambda.makeLambda({
     // required
     appName: 'nameOfApp',
@@ -51,7 +51,7 @@ const lambdaCloudformation = aws.lambda.makeLambda({
 ## lambda.cf.makeInlineLambda
 
 ```js
-const aws = require('aws-foundation')
+import * as aws from 'rise-aws-foundation'
 const code = `
 module.exports.handler = async () => {
     return 200
@@ -82,7 +82,7 @@ const lambdaCloudformation = aws.lambda.makeLambda({
 ## lambda.cf.invokeLambda
 
 ```js
-const aws = require('aws-foundation')
+import * as aws from 'rise-aws-foundation'
 
 const lambdaCloudformation = await aws.lambda.invokeLambda({
     name: 'myLambda',

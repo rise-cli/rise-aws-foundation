@@ -13,7 +13,7 @@ with a different unique id on every execution.
 ## db.get
 
 ```ts
-import aws from 'aws-foundation'
+import * as aws from 'rise-aws-foundation'
 const item = await aws.db.get({
     pk: 'note',
     sk: 'note_1234'
@@ -25,7 +25,7 @@ const item = await aws.db.get({
 Query with begins_with on the sk
 
 ```ts
-import aws from 'aws-foundation'
+import * as aws from 'rise-aws-foundation'
 const items = await aws.db.list({
     pk: 'note',
     sk: 'note_'
@@ -35,7 +35,7 @@ const items = await aws.db.list({
 ## db.set
 
 ```ts
-import aws from 'aws-foundation'
+import * as aws from 'rise-aws-foundation'
 await aws.db.set({
     pk: 'note',
     sk: 'note_@id',
@@ -46,7 +46,7 @@ await aws.db.set({
 ## db.remove
 
 ```ts
-import aws from 'aws-foundation'
+import * as aws from 'rise-aws-foundation'
 await aws.db.remove({
     pk: 'note',
     sk: 'note_1234'
@@ -56,6 +56,6 @@ await aws.db.remove({
 ## db.makeDb
 
 ```ts
-import aws from 'aws-foundation'
-const db = foundation.db.makeDb('myDbName')
+import * as aws from 'rise-aws-foundation'
+const db = aws.db.makeDb('myDbName')
 ```

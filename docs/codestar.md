@@ -12,21 +12,21 @@ CodeStar is a umbrella term refering to all of AWS's code services, such as:
 ## codestar.cf.makeGithubConnection
 
 ```ts
-import aws from 'aws-foundation'
+import * as aws from 'rise-aws-foundation'
 const result = aws.codestar.makeGithubConnection('nameOfMyPipeline')
 ```
 
 ## codestar.cf.makeArtifactBucket
 
 ```ts
-import aws from 'aws-foundation'
+import * as aws from 'rise-aws-foundation'
 const result = aws.codestar.makeArtifactBucket('nameOfMyPipeline')
 ```
 
 ## codestar.cf.makeBuildProject
 
 ```ts
-import aws from 'aws-foundation'
+import * as aws from 'rise-aws-foundation'
 const buildSpec = `version: 0.2
 phases:
     install:
@@ -155,7 +155,7 @@ const action = {
 #### Pipeline Example
 
 ```ts
-import aws from 'aws-foundation'
+import * as aws from 'rise-aws-foundation'
 const result = aws.codestar.makePipeline({
     pipelineName: 'nameOfMyPipeline',
     stages: [

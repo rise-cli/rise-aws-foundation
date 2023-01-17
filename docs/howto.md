@@ -79,7 +79,7 @@ const template = {
 We can now deploy this template using the CloudFormation methods in AWS Foundation:
 
 ```js
-const aws = require('aws-foundation')
+import * as aws from 'rise-aws-foundation'
 const createResult = await aws.cloudformation.deployStack({
     name: 'mystack',
     template: JSON.stringify(template)

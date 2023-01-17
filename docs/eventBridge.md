@@ -7,7 +7,7 @@
 ## eventBridge.emit
 
 ```ts
-import aws from 'aws-foundation'
+import * as aws from 'rise-aws-foundation'
 const item = await aws.eventBridge.emit({
     source: 'myService',
     event: 'somethingHappened',
@@ -19,7 +19,7 @@ const item = await aws.eventBridge.emit({
 ## eventBridge.makeEventRule
 
 ```ts
-import aws from 'aws-foundation'
+import * as aws from 'rise-aws-foundation'
 const item = await aws.eventBridge.makeEventRule({
     appName: 'myapp',
     eventBus: 'myBus',
