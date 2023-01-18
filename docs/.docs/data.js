@@ -1,1 +1,0 @@
-module.exports = { bucketName: "riseawsfoundationdocsdev-bucket-mainbucket-1u06lkl447o67", appId: "dyaf81sjgsjj1"}

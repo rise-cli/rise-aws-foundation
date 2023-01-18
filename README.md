@@ -16,3 +16,14 @@ You can use aws foundation in your project by npm installing it:
 ```bash
 npm i rise-aws-foundation
 ```
+
+## Services
+
+-   [How to](./docs/howto.md)
+-   [Cloudformation](./docs/cloudformation.md)
+-   [Codestar](./docs/codestar.md)
+-   [Cognito](./docs/cognito.md)
+-   [DynamoDB](./docs/db.md)
+-   [Eventbridge](./docs/eventBridge.md)
+-   [Lambda](./docs/lambda.md)
+-   [S3](./docs/s3.md)
