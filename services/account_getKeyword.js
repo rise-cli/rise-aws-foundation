@@ -14,6 +14,7 @@ const getOutput = async (str, region) => {
     const params = {
         StackName: stack
     }
+
     const res = await cloudformation.describeStacks(params).promise()
 
     if (!res.Stacks) {

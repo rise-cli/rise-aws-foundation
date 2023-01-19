@@ -21,7 +21,7 @@ const functionArn = await aws.lambda.updateCode({
 })
 ```
 
-## lambda.cf.makeLambda
+## lambda.makeLambda
 
 ```js
 import * as aws from 'rise-aws-foundation'
@@ -48,7 +48,7 @@ const lambdaCloudformation = aws.lambda.makeLambda({
 })
 ```
 
-## lambda.cf.makeInlineLambda
+## lambda.makeInlineLambda
 
 ```js
 import * as aws from 'rise-aws-foundation'
@@ -79,7 +79,7 @@ const lambdaCloudformation = aws.lambda.makeLambda({
 })
 ```
 
-## lambda.cf.invokeLambda
+## lambda.invokeLambda
 
 ```js
 import * as aws from 'rise-aws-foundation'

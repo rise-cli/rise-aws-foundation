@@ -17,12 +17,6 @@ import { removeStack } from './services/cloudformation_removeStack.js'
 import { makeLambdaErrorAlarm } from './services/cloudwatch_makeLambdaErrorAlarm.js'
 import { runLogInsightsQuery } from './services/cloudwatch_runLogInsightsQuery.js'
 
-// CodeStar
-import { makeArtifactBucket } from './services/codestar_makeArtifactBucket.js'
-import { makeBuildProject } from './services/codestar_makeBuildProject.js'
-import { makeGithubConnection } from './services/codestar_makeGithubConnection.js'
-import { makePipeline } from './services/codestar_makePipeline.js'
-
 // Cognito
 import { makeCognito } from './services/cognito_makeCognito.js'
 import {
@@ -75,13 +69,6 @@ export const cloudformation = {
 export const cloudwatch = {
     makeLambdaErrorAlarm,
     runLogInsightsQuery
-}
-
-export const codestar = {
-    makeArtifactBucket,
-    makeBuildProject,
-    makeGithubConnection,
-    makePipeline
 }
 
 export const cognito = {

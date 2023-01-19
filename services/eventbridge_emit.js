@@ -14,7 +14,6 @@ const eventBridge = new AWS.EventBridge({
 export async function emit(input) {
     const params = {
         Entries: [
-            /* required */
             {
                 Detail: JSON.stringify(input.payload),
                 DetailType: input.event,
@@ -26,7 +25,6 @@ export async function emit(input) {
                     'Wed Dec 31 1969 16:00:00 GMT-0800 (PST)' ||
                     123456789
             }
-            /* more items */
         ]
     }
     return await eventBridge.putEvents(params).promise()

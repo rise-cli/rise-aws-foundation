@@ -12,7 +12,6 @@
  */
 export function makeLambda(props) {
     const b = props.bucketArn.split(':::')[1]
-
     const basePermissions = [
         {
             Action: ['logs:CreateLogStream'],
@@ -45,7 +44,6 @@ export function makeLambda(props) {
         Resources: {
             /**
              * Log Group
-             *
              */
             [`Lambda${props.name}${props.stage}LogGroup`]: {
                 Type: 'AWS::Logs::LogGroup',
@@ -56,7 +54,6 @@ export function makeLambda(props) {
 
             /**
              * Lambda Function
-             *
              */
             [`Lambda${props.name}${props.stage}`]: {
                 Type: 'AWS::Lambda::Function',
@@ -86,7 +83,6 @@ export function makeLambda(props) {
 
             /**
              * Lambda Function Role
-             *
              */
             [`Lambda${props.name}${props.stage}Role`]: {
                 Type: 'AWS::IAM::Role',

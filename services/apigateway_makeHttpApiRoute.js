@@ -11,17 +11,17 @@ export const makeHttpApiRoute = ({
     functionReference,
     authorizerRef
 }) => {
-    // cloudformation keys do not support /{proxy+} as it
-    // contains special characters CF doesnt handle
+    /**
+     * cloudformation keys do not support /{proxy+} as it
+     * contains special characters CF doesnt handle
+     */
     const routeKeyName = route === '/{proxy+}' || '{proxy+}' ? 'all' : route
-
     const permissionKey = `${functionReference}PermissionHttp`
     const integrationKey = `HttpApiIntegration${functionReference}`
     const routeKey = `HttpApi${routeKeyName}${method}${functionReference}`
 
     const template = {
         Resources: {
-            // Route
             [permissionKey]: {
                 Type: 'AWS::Lambda::Permission',
                 Properties: {
@@ -80,10 +80,8 @@ export const makeHttpApiRoute = ({
             AuthorizerId: {
                 Ref: authorizerRef
             }
-            // AuthorizationScopes: ['user.id', 'user.email']
         }
 
-        // @ts-ignore
         template.Resources[routeKey].DependsOn.push('ApiAuthorizer')
 
         template.Resources[routeKey].Properties = {

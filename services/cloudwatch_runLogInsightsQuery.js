@@ -25,7 +25,7 @@ async function startQuery({ start, end, query, limit, logGroups }) {
 }
 
 async function getQueryResult(id) {
-    var params = {
+    const params = {
         queryId: id
     }
     const x = await cloudwatchlogs.getQueryResults(params).promise()

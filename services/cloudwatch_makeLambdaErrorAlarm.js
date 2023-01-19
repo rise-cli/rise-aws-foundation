@@ -39,7 +39,6 @@ export function makeLambdaErrorAlarm(config) {
     if (config.snsTopic) {
         cf.Resources[
             `Alarm${config.name}${config.stage}`
-            // @ts-ignore
         ].Properties.AlarmActions = [config.snsTopic]
     }
 

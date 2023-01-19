@@ -41,7 +41,6 @@ export function makeInlineLambda(props) {
         Resources: {
             /**
              * Log Group
-             *
              */
             [`Lambda${props.name}${props.stage}LogGroup`]: {
                 Type: 'AWS::Logs::LogGroup',
@@ -52,7 +51,6 @@ export function makeInlineLambda(props) {
 
             /**
              * Lambda Function
-             *
              */
             [`Lambda${props.name}${props.stage}`]: {
                 Type: 'AWS::Lambda::Function',
@@ -80,7 +78,6 @@ export function makeInlineLambda(props) {
 
             /**
              * Lambda Function Role
-             *
              */
             [`Lambda${props.name}${props.stage}Role`]: {
                 Type: 'AWS::IAM::Role',

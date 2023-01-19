@@ -83,7 +83,9 @@ const db = new AWS.DynamoDB.DocumentClient({
     region: region
 })
 
-/** Get an item from a DynamoDB table */
+/**
+ * Get an item from a DynamoDB table
+ */
 export async function get(input, table = process.env.TABLE_NAME) {
     if (!input.sk) {
         throw new Error('Input must have sk defined')
@@ -135,7 +137,9 @@ export async function get(input, table = process.env.TABLE_NAME) {
     throw new Error('Input must have pk, pk2, or pk3 defined')
 }
 
-/** Query items in a DynamoDB table with begins with  */
+/**
+ * Query items in a DynamoDB table with begins with
+ */
 export async function list(input, table = process.env.TABLE_NAME) {
     if (!input.sk) {
         throw new Error('Input must have sk defined')
@@ -256,7 +260,9 @@ export async function set(input, table = process.env.TABLE_NAME) {
     return formattedInput
 }
 
-/** Remove an item from a DynamoDB Tables */
+/**
+ * Remove an item from a DynamoDB Tables
+ */
 export async function remove(input, table = process.env.TABLE_NAME) {
     await db
         .delete({

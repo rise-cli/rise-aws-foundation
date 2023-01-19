@@ -1,56 +1,4 @@
 import AWS from 'aws-sdk'
-// TODO: deal with all the comments and types from ts->js refactor
-
-// export type StackStatus =
-//     // create
-//     | 'CREATE_IN_PROGRESS'
-//     | 'CREATE_FAILED'
-//     | 'CREATE_COMPLETE'
-//     // rollback
-//     | 'ROLLBACK_IN_PROGRESS'
-//     | 'ROLLBACK_FAILED'
-//     | 'ROLLBACK_COMPLETE'
-//     // delete
-//     | 'DELETE_IN_PROGRESS'
-//     | 'DELETE_FAILED'
-//     | 'DELETE_COMPLETE'
-//     // update
-//     | 'UPDATE_IN_PROGRESS'
-//     | 'UPDATE_COMPLETE_CLEANUP_IN_PROGRESS'
-//     | 'UPDATE_COMPLETE'
-//     | 'UPDATE_FAILED'
-//     // update rollback
-//     | 'UPDATE_ROLLBACK_IN_PROGRESS'
-//     | 'UPDATE_ROLLBACK_FAILED'
-//     | 'UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS'
-//     | 'UPDATE_ROLLBACK_COMPLETE'
-//     // review
-//     | 'REVIEW_IN_PROGRESS'
-//     // import
-//     | 'IMPORT_IN_PROGRESS'
-//     | 'IMPORT_COMPLETE'
-//     | 'IMPORT_ROLLBACK_IN_PROGRESS'
-//     | 'IMPORT_ROLLBACK_FAILED'
-//     | 'IMPORT_ROLLBACK_COMPLETE'
-
-// type StatusUpdateResource = {
-//     id: string
-//     status: string
-//     type: string
-// }
-
-// type Resource = {
-//     id: string
-//     status: string
-//     type: string
-// }
-
-// enum ResultStatus {
-//     'success' = 'success',
-//     'fail' = 'fail',
-//     'rollback' = 'rollback',
-//     'inprogress' = 'inprogress'
-// }
 
 const ResultStatus = {
     success: 'success',
@@ -92,38 +40,20 @@ const stackStateMap = {
     IMPORT_ROLLBACK_COMPLETE: ResultStatus.rollback
 }
 
-// export type Output = {
-//     status: ResultStatus
-//     message: string
-//     outputs: Record<string, string>
-// }
-
-// type RecursiveConfig = {
-//     stackName: string
-//     minRetryInterval: number
-//     maxRetryInterval: number
-//     backoffRate: number
-//     maxRetries: number
-//     onCheck: (resources: Resource[], times: number) => void
-// }
-
-// export type StatusUpdateInput = StatusUpdateResource[]
-
 /**
  * GetStackInfo
- *
  */
 const getStackInfo = (region) => async (name) => {
     const cloudformation = new AWS.CloudFormation({
         region
     })
+
     const params = {
         StackName: name
     }
 
     try {
         const result = await cloudformation.describeStacks(params).promise()
-
         if (!result.Stacks || result.Stacks.length === 0) {
             throw new Error('No stacks found with the name ' + name)
         }
@@ -140,19 +70,21 @@ const getStackInfo = (region) => async (name) => {
 
 /**
  * GetStackResourceStatus
- *
  */
 const getStackResourceStatus = (region) => async (name) => {
     const cloudformation = new AWS.CloudFormation({
         region
     })
+
     const params = {
         StackName: name
     }
+
     try {
         const result = await cloudformation
             .describeStackResources(params)
             .promise()
+
         if (!result.StackResources) {
             throw new Error('No stack resources found')
         }
@@ -167,14 +99,6 @@ const getStackResourceStatus = (region) => async (name) => {
     }
 }
 
-// type StackInfo = {
-//     status: ResultStatus
-//     message: string
-//     outputs: {
-//         key: string
-//         value: string
-//     }[]
-// }
 /**
  * Get Cloudformation stack info and outputs
  */
@@ -183,7 +107,6 @@ async function getCloudFormationStackInfo(getInfo, name) {
     const status = data.StackStatus
     const message = data.StackStatusReason || 'unknown'
     const outputs = data.Outputs || []
-
     const stackInfoStatus = stackStateMap[status] || ResultStatus.fail
 
     return {
@@ -197,6 +120,7 @@ async function getCloudFormationStackInfo(getInfo, name) {
             if (!o.OutputValue) {
                 throw new Error('Output does not have a key')
             }
+
             return {
                 key: o.OutputKey,
                 value: o.OutputValue
@@ -215,7 +139,6 @@ async function checkAgainState(io, config, timer, times) {
      * Wait based on timer passed in to the function
      */
     const wait = (time) => new Promise((r) => setTimeout(() => r(), time))
-
     await wait(timer)
 
     /**
@@ -306,11 +229,6 @@ function unknownState() {
     }
 }
 
-// type IO = {
-//     getInfo: (name: string) => Promise<CloudFormation.Stack>
-//     getResources: (name: string) => Promise<CloudFormation.StackResources>
-// }
-
 async function recursiveCheck(io, config, times, timer) {
     const stackInfo = await getCloudFormationStackInfo(
         io.getInfo,
@@ -335,11 +253,6 @@ async function recursiveCheck(io, config, times, timer) {
 
     return unknownState()
 }
-
-// export type GetDeploymentStatusInput = {
-//     region?: string
-//     config: RecursiveConfig
-// }
 
 export async function getDeployStatus(props) {
     const region = props.region || process.env.AWS_REGION || 'us-east-1'

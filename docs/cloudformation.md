@@ -2,9 +2,7 @@
 
 ## Introduction
 
-CloudFormation is the way we deploy things into an AWS account. Every other resource within aws foundations
-has methods that will create JSON objects representing AWS resources. With this information,
-we can deploy a Cloudformation stack.
+CloudFormation is the way we deploy things into an AWS account. Every other resource within `rise-aws-foundations` has methods that will create JSON objects representing AWS resources. With this information, we can deploy a Cloudformation stack.
 
 ## cloudformation.deployStack
 

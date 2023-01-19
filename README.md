@@ -21,7 +21,6 @@ npm i rise-aws-foundation
 
 -   [How to](./docs/howto.md)
 -   [Cloudformation](./docs/cloudformation.md)
--   [Codestar](./docs/codestar.md)
 -   [Cognito](./docs/cognito.md)
 -   [DynamoDB](./docs/db.md)
 -   [Eventbridge](./docs/eventBridge.md)
