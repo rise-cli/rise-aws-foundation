@@ -1,5 +1,7 @@
 # Rise AWS Foundation
 
+![GitHub CI status](https://github.com/rise-cli/rise-aws-foundation/actions/workflows/test.yml/badge.svg)]
+
 The aws sdk gives us a lot of power and options. This is a good thing, but can also
 be overwhelming. The purpose of this project is to provide a layer on top of the sdk that is:
 
@@ -26,10 +28,3 @@ npm i rise-aws-foundation
 -   [Eventbridge](./docs/eventBridge.md)
 -   [Lambda](./docs/lambda.md)
 -   [S3](./docs/s3.md)
-
-## Progress
-
--   ✅ tests
--   ✅ docs
--   🔲 examples
--   🔲 CICD
