@@ -1,6 +1,6 @@
 import { deployStack } from '../services/cloudformation_deployStack.mjs'
-import { makeHttpApi } from '../services/apiGateway_makeHttpApi.mjs'
-import { makeHttpApiRoute } from '../services/apiGateway_makeHttpApiRoute.mjs'
+import { makeHttpApi } from '../services/apigateway_makeHttpApi.mjs'
+import { makeHttpApiRoute } from '../services/apigateway_makeHttpApiRoute.mjs'
 import { makeInlineLambda } from '../services/lambda_makeInlineLambda.mjs'
 import { getOutputs } from '../services/cloudformation_getOutputs.mjs'
 import test from 'node:test'
