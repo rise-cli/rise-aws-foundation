@@ -3,9 +3,10 @@
     "version": "0.0.11",
     "description": "",
     "type": "module",
-    "main": "index.js",
+    "main": "index.mjs",
     "scripts": {
-        "test": "node --test && echo \"✅ Tests Pass\"",
+        "test": "node --test --test-reporter=spec",
+        "test:filtered": "node --test --test-reporter=spec --test-name-pattern=apigateway",
         "release": "npm run test && npm publish"
     },
     "keywords": [],
@@ -13,5 +14,8 @@
     "license": "ISC",
     "dependencies": {
         "aws-sdk": "^2.1295.0"
+    },
+    "devDependencies": {
+        "rise-filesystem-foundation": "^0.0.1"
     }
 }

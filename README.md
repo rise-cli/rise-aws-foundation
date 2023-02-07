@@ -26,3 +26,10 @@ npm i rise-aws-foundation
 -   [Eventbridge](./docs/eventBridge.md)
 -   [Lambda](./docs/lambda.md)
 -   [S3](./docs/s3.md)
+
+## Progress
+
+-   ✅ tests
+-   ✅ docs
+-   🔲 examples
+-   🔲 CICD
