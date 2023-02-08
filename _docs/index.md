@@ -1,5 +1,7 @@
 # Rise AWS Foundation
 
+[Github](https://github.com/rise-cli/rise-aws-foundation)
+
 The aws sdk gives us a lot of power and options. This is a good thing, but can also
 be overwhelming. The purpose of this project is to provide a layer on top of the sdk that is:
 

@@ -1,0 +1,1 @@
+export const config = { bucketName: "riseawsfoundationdev-bucketdev-mainbucket-1ho2syxrjhidy"}

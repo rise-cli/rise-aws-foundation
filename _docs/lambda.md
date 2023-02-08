@@ -52,11 +52,7 @@ const lambdaCloudformation = aws.lambda.makeLambda({
 
 ```js
 import * as aws from 'rise-aws-foundation'
-const code = `
-module.exports.handler = async () => {
-    return 200
-}
-`
+const code = 'module.exports.handler = async () =>  200'
 const lambdaCloudformation = aws.lambda.makeLambda({
     // required
     appName: 'nameOfApp',
