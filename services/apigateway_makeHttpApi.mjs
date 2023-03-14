@@ -5,8 +5,12 @@
  * @param {object} [props.auth]
  * @param {string} props.auth.poolIdRef
  * @param {string} props.auth.clientIdRef
+ * @param {object} [props.domain]
+ * @param {string} props.domain.name
+ * @param {string} props.domain.path
+ * @param {string} props.domain.stage
  */
-export const makeHttpApi = ({ name, stage, auth }) => {
+export const makeHttpApi = ({ name, stage, auth, domain }) => {
     const template = {
         Resources: {
             ApiRoot: {
@@ -83,6 +87,26 @@ export const makeHttpApi = ({ name, stage, auth }) => {
         template.Resources = {
             ...template.Resources,
             ...cognitoAuthorizer
+        }
+    }
+
+    if (domain) {
+        const mapping = {
+            RestApiMapping: {
+                Type: 'AWS::ApiGatewayV2::ApiMapping',
+                Properties: {
+                    ApiId: {
+                        Ref: 'ApiRoot'
+                    },
+                    ApiMappingKey: domain.path,
+                    DomainName: domain.nam,
+                    Stage: domain.stage
+                }
+            }
+        }
+        template.Resources = {
+            ...template.Resources,
+            ...mapping
         }
     }
     return template
