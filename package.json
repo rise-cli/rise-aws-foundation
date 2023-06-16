@@ -1,6 +1,6 @@
 {
     "name": "rise-aws-foundation",
-    "version": "0.0.19",
+    "version": "0.0.20",
     "description": "",
     "main": "index.mjs",
     "scripts": {
@@ -12,6 +12,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@aws-sdk/client-amplify": "^3.353.0",
         "@aws-sdk/client-cloudformation": "^3.353.0",
         "@aws-sdk/client-cloudwatch-logs": "^3.353.0",
         "@aws-sdk/client-dynamodb": "^3.353.0",

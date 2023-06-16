@@ -26,6 +26,9 @@ import { makeCognito } from './services/cognito_makeCognito.mjs'
 //     getUser
 // } from './services/cognito_crud.mjs'
 
+// Amplify
+import { deployAmplify } from './services/amplify_deploy.mjs'
+
 // DynamoDB
 import { makeDb } from './services/dynamodb_makeDb.mjs'
 import * as dynamodb from './services/dynamodb_crud.mjs'
@@ -107,4 +110,8 @@ export const s3 = {
     makeSimpleBucket,
     removeFile,
     uploadFile
+}
+
+export const amplify = {
+    deploy: deployAmplify
 }
