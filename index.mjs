@@ -28,6 +28,7 @@ import { makeCognito } from './services/cognito_makeCognito.mjs'
 
 // Amplify
 import { deployAmplify } from './services/amplify_deploy.mjs'
+import { makeAmplifyApp } from './services/amplify_makeApp.mjs'
 
 // DynamoDB
 import { makeDb } from './services/dynamodb_makeDb.mjs'
@@ -113,5 +114,6 @@ export const s3 = {
 }
 
 export const amplify = {
-    deploy: deployAmplify
+    deploy: deployAmplify,
+    makeApp: makeAmplifyApp
 }
