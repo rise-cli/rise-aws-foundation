@@ -1,4 +1,4 @@
-import AWS from 'aws-sdk'
+import { LambdaClient, UpdateFunctionCodeCommand } from '@aws-sdk/client-lambda'
 
 /**
  * @param {object} props
@@ -16,10 +16,11 @@ export async function updateLambdaCode({ name, bucket, filePath, region }) {
     }
 
     const theRegion = region || process.env.AWS_REGION || 'us-east-1'
-    const lambda = new AWS.Lambda({
+    const client = new LambdaClient({
         region: theRegion
     })
 
-    const res = await lambda.updateFunctionCode(functionCodeParams).promise()
+    const command = new UpdateFunctionCodeCommand(functionCodeParams)
+    const res = await client.send(command)
     return res.FunctionArn
 }

@@ -19,12 +19,12 @@ import { runLogInsightsQuery } from './services/cloudwatch_runLogInsightsQuery.m
 
 // Cognito
 import { makeCognito } from './services/cognito_makeCognito.mjs'
-import {
-    createUser,
-    removeUser,
-    resetPassword,
-    getUser
-} from './services/cognito_crud.mjs'
+// import {
+//     createUser,
+//     removeUser,
+//     resetPassword,
+//     getUser
+// } from './services/cognito_crud.mjs'
 
 // DynamoDB
 import { makeDb } from './services/dynamodb_makeDb.mjs'
@@ -72,11 +72,11 @@ export const cloudwatch = {
 }
 
 export const cognito = {
-    makeCognito,
-    getUser,
-    createUser,
-    removeUser,
-    resetPassword
+    makeCognito
+    // getUser,
+    // createUser,
+    // removeUser,
+    // resetPassword
 }
 
 export const db = {

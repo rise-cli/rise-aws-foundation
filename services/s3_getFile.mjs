@@ -1,16 +1,18 @@
-import AWS from 'aws-sdk'
+import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3'
 
 /**
  * @param {string} props.bucket
  * @param {string} props.key
  */
 export async function getFile(props) {
-    const s3 = new AWS.S3()
-    const params = {
+    const client = new S3Client({})
+    const input = {
         Bucket: props.bucket,
         Key: props.key
     }
-    const x = await s3.getObject(params).promise()
+
+    const command = new GetObjectCommand(input)
+    const x = await client.send(command)
     return {
         body: x.Body
     }

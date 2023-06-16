@@ -1,4 +1,8 @@
-import AWS from 'aws-sdk'
+import {
+    CloudFormationClient,
+    DescribeStacksCommand,
+    DescribeStackResourcesCommand
+} from '@aws-sdk/client-cloudformation'
 
 const ResultStatus = {
     success: 'success',
@@ -44,16 +48,17 @@ const stackStateMap = {
  * GetStackInfo
  */
 const getStackInfo = (region) => async (name) => {
-    const cloudformation = new AWS.CloudFormation({
+    const client = new CloudFormationClient({
         region
     })
 
-    const params = {
+    const input = {
         StackName: name
     }
 
     try {
-        const result = await cloudformation.describeStacks(params).promise()
+        const command = new DescribeStacksCommand(input)
+        const result = await client.send(command)
         if (!result.Stacks || result.Stacks.length === 0) {
             throw new Error('No stacks found with the name ' + name)
         }
@@ -72,18 +77,17 @@ const getStackInfo = (region) => async (name) => {
  * GetStackResourceStatus
  */
 const getStackResourceStatus = (region) => async (name) => {
-    const cloudformation = new AWS.CloudFormation({
+    const client = new CloudFormationClient({
         region
     })
 
-    const params = {
+    const input = {
         StackName: name
     }
 
     try {
-        const result = await cloudformation
-            .describeStackResources(params)
-            .promise()
+        const command = new DescribeStackResourcesCommand(input)
+        const result = await client.send(command)
 
         if (!result.StackResources) {
             throw new Error('No stack resources found')

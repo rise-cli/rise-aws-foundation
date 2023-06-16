@@ -1,7 +1,12 @@
-import AWS from 'aws-sdk'
+import {
+    CloudWatchLogsClient,
+    StartQueryCommand,
+    GetQueryResultsCommand
+} from '@aws-sdk/client-cloudwatch-logs'
 
 const region = process.env.AWS_REGION || 'us-east-1'
-const cloudwatchlogs = new AWS.CloudWatchLogs({
+
+const client = new CloudWatchLogsClient({
     apiVersion: '2014-03-28',
     region: region
 })
@@ -13,22 +18,25 @@ function waitOneSecond() {
 }
 
 async function startQuery({ start, end, query, limit, logGroups }) {
-    const params = {
+    const input = {
         endTime: end,
         queryString: query,
         startTime: start,
         limit: limit,
         logGroupNames: logGroups
     }
-    const x = await cloudwatchlogs.startQuery(params).promise()
+    const command = new StartQueryCommand(input)
+    const x = await client.send(command)
     return x.queryId
 }
 
 async function getQueryResult(id) {
-    const params = {
+    const input = {
         queryId: id
     }
-    const x = await cloudwatchlogs.getQueryResults(params).promise()
+
+    const command = new GetQueryResultsCommand(input)
+    const x = await client.send(command)
     return x
 }
 

@@ -17,7 +17,12 @@ export const makeHttpApi = ({ name, stage, auth, domain }) => {
                 Type: 'AWS::ApiGatewayV2::Api',
                 Properties: {
                     Name: `${name}-${stage}`,
-                    ProtocolType: 'HTTP'
+                    ProtocolType: 'HTTP',
+                    CorsConfiguration: {
+                        AllowHeaders: ['Content-Type', 'Authorization'],
+                        AllowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
+                        AllowOrigins: ['*']
+                    }
                 }
             },
             ApiStage: {

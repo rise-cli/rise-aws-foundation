@@ -1,4 +1,7 @@
-import AWS from 'aws-sdk'
+import {
+    CloudFormationClient,
+    DeleteStackCommand
+} from '@aws-sdk/client-cloudformation'
 
 /**
  * @param {object} props
@@ -7,13 +10,14 @@ import AWS from 'aws-sdk'
  * @param {string} [props.region]
  */
 export async function removeStack(props) {
-    const cloudformation = new AWS.CloudFormation({
+    const client = new CloudFormationClient({
         region: props.region || process.env.AWS_REGION || 'us-east-1'
     })
 
-    const params = {
+    const input = {
         StackName: props.name
     }
 
-    return await cloudformation.deleteStack(params).promise()
+    const command = new DeleteStackCommand(input)
+    return await client.send(command)
 }

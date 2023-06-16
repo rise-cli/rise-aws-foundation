@@ -1,5 +1,11 @@
 import crypto from 'crypto'
-import AWS from 'aws-sdk'
+import {
+    DynamoDBClient,
+    GetItemCommand,
+    QueryCommand,
+    PutItemCommand,
+    DeleteItemCommand
+} from '@aws-sdk/client-dynamodb'
 
 /**
  * UUID
@@ -79,8 +85,9 @@ function formatKeys(oldInput) {
  * DB operations
  */
 const region = process.env.AWS_REGION || 'us-east-1'
-const db = new AWS.DynamoDB.DocumentClient({
-    region: region
+
+const client = new DynamoDBClient({
+    region
 })
 
 /**
@@ -92,45 +99,45 @@ export async function get(input, table = process.env.TABLE_NAME) {
     }
 
     if (input.pk) {
-        const item = await db
-            .get({
-                TableName: table,
-                Key: {
-                    pk: input.pk,
-                    sk: input.sk
-                }
-            })
-            .promise()
+        const input = {
+            TableName: table,
+            Key: {
+                pk: input.pk,
+                sk: input.sk
+            }
+        }
 
+        const command = new GetItemCommand(input)
+        const item = await client.send(command)
         return item.Item || false
     }
 
     if (input.pk2) {
-        const item = await db
-            .get({
-                TableName: table,
-                IndexName: 'pk2',
-                Key: {
-                    pk2: input.pk2,
-                    sk: input.sk
-                }
-            })
-            .promise()
+        const input = {
+            TableName: table,
+            IndexName: 'pk2',
+            Key: {
+                pk2: input.pk2,
+                sk: input.sk
+            }
+        }
 
+        const command = new GetItemCommand(input)
+        const item = await client.send(command)
         return item.Item || false
     }
     if (input.pk3) {
-        const item = await db
-            .get({
-                TableName: table,
-                IndexName: 'pk3',
-                Key: {
-                    pk3: input.pk3,
-                    sk: input.sk
-                }
-            })
-            .promise()
+        const input = {
+            TableName: table,
+            IndexName: 'pk3',
+            Key: {
+                pk3: input.pk3,
+                sk: input.sk
+            }
+        }
 
+        const command = new GetItemCommand(input)
+        const item = await client.send(command)
         return item.Item || false
     }
 
@@ -192,7 +199,9 @@ export async function list(input, table = process.env.TABLE_NAME) {
         }
     }
 
-    const result = await db.query(params).promise()
+    const command = new QueryCommand(params)
+    const result = await client.send(command)
+
     return result.Items || []
 }
 
@@ -211,14 +220,13 @@ export async function create(input, table = process.env.TABLE_NAME) {
 
     const createItem = async () => {
         const formattedInput = formatKeys(input)
-
-        await db
-            .put({
-                TableName: table,
-                Item: formattedInput,
-                ConditionExpression: 'attribute_not_exists(sk)'
-            })
-            .promise()
+        const input = {
+            TableName: table,
+            Item: formattedInput,
+            ConditionExpression: 'attribute_not_exists(sk)'
+        }
+        const command = new PutItemCommand(input)
+        await client.send(command)
 
         return formattedInput
     }
@@ -250,12 +258,13 @@ export async function set(input, table = process.env.TABLE_NAME) {
     }
 
     const formattedInput = formatKeys(input)
-    await db
-        .put({
-            TableName: table,
-            Item: formattedInput
-        })
-        .promise()
+
+    const params = {
+        TableName: table,
+        Item: formattedInput
+    }
+    const command = new PutItemCommand(params)
+    await client.send(command)
 
     return formattedInput
 }
@@ -264,14 +273,14 @@ export async function set(input, table = process.env.TABLE_NAME) {
  * Remove an item from a DynamoDB Tables
  */
 export async function remove(input, table = process.env.TABLE_NAME) {
-    await db
-        .delete({
-            TableName: table,
-            Key: {
-                pk: input.pk,
-                sk: input.sk
-            }
-        })
-        .promise()
+    const params = {
+        TableName: table,
+        Key: {
+            pk: input.pk,
+            sk: input.sk
+        }
+    }
+    const command = new DeleteItemCommand(params)
+    await client.send(command)
     return input
 }

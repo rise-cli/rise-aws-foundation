@@ -1,4 +1,4 @@
-import AWS from 'aws-sdk'
+import { Lambda } from "@aws-sdk/client-lambda";
 
 /**
  * @param {object} props
@@ -15,10 +15,10 @@ export const invokeLambda = async ({ name, payload, region }) => {
         params.Payload = payload
     }
 
-    const lambda = new AWS.Lambda({
+    const lambda = new Lambda({
         region: region || process.env.AWS_REGION || 'us-east-1'
     })
 
-    const executionResult = await lambda.invoke(params).promise()
+    const executionResult = await lambda.invoke(params)
     return executionResult.Payload
 }

@@ -1,4 +1,7 @@
-import AWS from 'aws-sdk'
+import {
+    CloudFormationClient,
+    DescribeStacksCommand
+} from '@aws-sdk/client-cloudformation'
 
 /**
  * @param {object} props
@@ -7,7 +10,7 @@ import AWS from 'aws-sdk'
  * @param {string} [props.region]
  */
 export async function getOutputs(props) {
-    const cloudformation = new AWS.CloudFormation({
+    const client = new CloudFormationClient({
         region: props.region || process.env.AWS_REGION || 'us-east-1'
     })
 
@@ -16,11 +19,12 @@ export async function getOutputs(props) {
         return v ? v.OutputValue : false
     }
 
-    const params = {
+    const input = {
         StackName: props.stack
     }
 
-    const x = await cloudformation.describeStacks(params).promise()
+    const command = new DescribeStacksCommand(input)
+    const x = await client.send(command)
 
     if (!x.Stacks || x.Stacks.length === 0) {
         throw new Error('No stacks found with the name ' + props.stack)

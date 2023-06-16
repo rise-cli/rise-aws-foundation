@@ -1,17 +1,25 @@
 {
     "name": "rise-aws-foundation",
-    "version": "0.0.12",
+    "version": "0.0.19",
     "description": "",
     "main": "index.mjs",
     "scripts": {
         "test": "node --test --test-reporter=spec",
-        "test:filtered": "node --test --test-reporter=spec --test-name-pattern=apigateway",
+        "test:filtered": "node --test --test-reporter=spec --test-name-pattern=s3",
         "release": "npm run test && npm publish"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@aws-sdk/client-cloudformation": "^3.353.0",
+        "@aws-sdk/client-cloudwatch-logs": "^3.353.0",
+        "@aws-sdk/client-dynamodb": "^3.353.0",
+        "@aws-sdk/client-eventbridge": "^3.353.0",
+        "@aws-sdk/client-lambda": "^3.353.0",
+        "@aws-sdk/client-s3": "^3.353.0",
+        "@aws-sdk/client-ssm": "^3.353.0",
+        "@aws-sdk/client-sts": "^3.353.0",
         "aws-sdk": "^2.1295.0"
     },
     "devDependencies": {

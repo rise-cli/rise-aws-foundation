@@ -1,15 +1,17 @@
-import AWS from 'aws-sdk'
+import { S3Client, DeleteObjectCommand } from '@aws-sdk/client-s3'
 
 /**
  * @param {string} props.bucket
  * @param {string} props.key
  */
 export async function removeFile(props) {
-    const s3 = new AWS.S3()
-    const params = {
+    const client = new S3Client({})
+    const input = {
         Bucket: props.bucket,
         Key: props.key
     }
-    await s3.deleteObject(params).promise()
+
+    const command = new DeleteObjectCommand(input)
+    await client.send(command)
     return true
 }

@@ -1,4 +1,8 @@
-import AWS from 'aws-sdk'
+import {
+    CloudFormationClient,
+    CreateStackCommand,
+    UpdateStackSetCommand
+} from '@aws-sdk/client-cloudformation'
 
 /**
  * @param {object} props
@@ -7,22 +11,21 @@ import AWS from 'aws-sdk'
  * @param {string} [props.region]
  */
 export async function deployStack(props) {
-    const aws = AWS
-    const cloudformation = new aws.CloudFormation({
+    const client = new CloudFormationClient({
         region: props.region || process.env.AWS_REGION || 'us-east-1'
     })
     try {
-        const res = await cloudformation
-            .updateStack({
-                StackName: props.name,
-                Capabilities: [
-                    'CAPABILITY_IAM',
-                    'CAPABILITY_AUTO_EXPAND',
-                    'CAPABILITY_NAMED_IAM'
-                ],
-                TemplateBody: props.template
-            })
-            .promise()
+        const input = {
+            StackName: props.name,
+            Capabilities: [
+                'CAPABILITY_IAM',
+                'CAPABILITY_AUTO_EXPAND',
+                'CAPABILITY_NAMED_IAM'
+            ],
+            TemplateBody: props.template
+        }
+        const command = new UpdateStackSetCommand(input)
+        const res = await client.send(command)
         return {
             status: 'updating',
             id: res.StackId
@@ -30,17 +33,17 @@ export async function deployStack(props) {
     } catch (e) {
         if (e instanceof Error) {
             if (e.message.includes('does not exist')) {
-                const res = await cloudformation
-                    .createStack({
-                        StackName: props.name,
-                        Capabilities: [
-                            'CAPABILITY_IAM',
-                            'CAPABILITY_AUTO_EXPAND',
-                            'CAPABILITY_NAMED_IAM'
-                        ],
-                        TemplateBody: props.template
-                    })
-                    .promise()
+                const input = {
+                    StackName: props.name,
+                    Capabilities: [
+                        'CAPABILITY_IAM',
+                        'CAPABILITY_AUTO_EXPAND',
+                        'CAPABILITY_NAMED_IAM'
+                    ],
+                    TemplateBody: props.template
+                }
+                const command = new CreateStackCommand(input)
+                const res = await client.send(command)
 
                 return {
                     status: 'creating',

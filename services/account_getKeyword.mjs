@@ -1,21 +1,27 @@
-import AWS from 'aws-sdk'
+import {
+    CloudFormationClient,
+    DescribeStacksCommand
+} from '@aws-sdk/client-cloudformation'
+import { STSClient, GetCallerIdentityCommand } from '@aws-sdk/client-sts'
+import { SSMClient, GetParameterCommand } from '@aws-sdk/client-ssm'
 
 /**
  * @param {string} str
  * @param {string} region
  */
 const getOutput = async (str, region) => {
-    const cloudformation = new AWS.CloudFormation({
+    const client = new CloudFormationClient({
         region
     })
 
     const stack = str.split('.')[1]
     const value = str.split('.')[2]
-    const params = {
+    const input = {
         StackName: stack
     }
 
-    const res = await cloudformation.describeStacks(params).promise()
+    const command = new DescribeStacksCommand(input)
+    const res = await client.send(command)
 
     if (!res.Stacks) {
         throw new Error('There as an issue describing stack: ' + stack)
@@ -39,14 +45,16 @@ const getOutput = async (str, region) => {
  * @param {string} region
  */
 const getSsmParam = async (str, region) => {
-    const v = str.split('.')[1]
-    const ssm = new AWS.SSM({
+    const client = new SSMClient({
         region: region
     })
-    const params = {
+    const v = str.split('.')[1]
+    const input = {
         Name: v
     }
-    const res = await ssm.getParameter(params).promise()
+    const command = new GetParameterCommand(input)
+    const res = await client.send(command)
+
     if (!res.Parameter) {
         throw new Error('There as an issue getting param: ' + v)
     }
@@ -54,8 +62,12 @@ const getSsmParam = async (str, region) => {
 }
 
 const getAccountId = async () => {
-    const sts = new AWS.STS()
-    const res = await sts.getCallerIdentity({}).promise()
+    const client = new STSClient({
+        region: 'us-east-1'
+    })
+
+    const command = new GetCallerIdentityCommand({})
+    const res = await client.send(command)
     return res.Account
 }
 

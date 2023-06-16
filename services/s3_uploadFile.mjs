@@ -1,4 +1,4 @@
-import AWS from 'aws-sdk'
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
 
 /**
  * @param {any} props.file
@@ -6,13 +6,15 @@ import AWS from 'aws-sdk'
  * @param {string} props.key
  */
 export async function uploadFile(props) {
-    const s3 = new AWS.S3()
-    const params = {
+    const client = new S3Client({})
+    const input = {
         Body: props.file,
         Bucket: props.bucket,
         Key: props.key
     }
-    const x = await s3.putObject(params).promise()
+
+    const command = new PutObjectCommand(input)
+    const x = await client.send(command)
     return {
         etag: x.ETag
     }

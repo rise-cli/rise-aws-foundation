@@ -1,7 +1,11 @@
-import AWS from 'aws-sdk'
+import {
+    EventBridgeClient,
+    PutEventsCommand
+} from '@aws-sdk/client-eventbridge'
+
 const region = process.env.AWS_REGION || 'us-east-1'
-const eventBridge = new AWS.EventBridge({
-    region: region
+const client = new EventBridgeClient({
+    region
 })
 
 /**
@@ -12,7 +16,7 @@ const eventBridge = new AWS.EventBridge({
  * @param {string} [props.eventBusName]
  */
 export async function emit(input) {
-    const params = {
+    const input = {
         Entries: [
             {
                 Detail: JSON.stringify(input.payload),
@@ -27,5 +31,7 @@ export async function emit(input) {
             }
         ]
     }
-    return await eventBridge.putEvents(params).promise()
+
+    const command = new PutEventsCommand(input)
+    return await client.send(command)
 }
