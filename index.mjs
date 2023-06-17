@@ -17,15 +17,6 @@ import { removeStack } from './services/cloudformation_removeStack.mjs'
 import { makeLambdaErrorAlarm } from './services/cloudwatch_makeLambdaErrorAlarm.mjs'
 import { runLogInsightsQuery } from './services/cloudwatch_runLogInsightsQuery.mjs'
 
-// Cognito
-import { makeCognito } from './services/cognito_makeCognito.mjs'
-// import {
-//     createUser,
-//     removeUser,
-//     resetPassword,
-//     getUser
-// } from './services/cognito_crud.mjs'
-
 // Amplify
 import { deployAmplify } from './services/amplify_deploy.mjs'
 import { makeAmplifyApp } from './services/amplify_makeApp.mjs'
@@ -51,6 +42,7 @@ import { makeBucket } from './services/s3_makeBucket.mjs'
 import { makeSimpleBucket } from './services/s3_makeSimpleBucket.mjs'
 import { removeFile } from './services/s3_removeFile.mjs'
 import { uploadFile } from './services/s3_uploadFile.mjs'
+import { emptyBucket } from './services/s3_emptyBucket.mjs'
 
 export const account = {
     getKeyword
@@ -73,14 +65,6 @@ export const cloudformation = {
 export const cloudwatch = {
     makeLambdaErrorAlarm,
     runLogInsightsQuery
-}
-
-export const cognito = {
-    makeCognito
-    // getUser,
-    // createUser,
-    // removeUser,
-    // resetPassword
 }
 
 export const db = {
@@ -110,7 +94,8 @@ export const s3 = {
     makeBucket,
     makeSimpleBucket,
     removeFile,
-    uploadFile
+    uploadFile,
+    emptyBucket
 }
 
 export const amplify = {
